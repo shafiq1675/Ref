@@ -1,0 +1,50 @@
+﻿<div id="body">
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>Welcome to ASP.NET Web API!</h1>
+                <h2>Modify the code in this template to jump-start your ASP.NET Web API development.</h2>
+            </hgroup> 
+            <div>
+                <input type="button" onclick="return AllcarDetails()" value="show" />
+            </div>   
+            <table id="listTable" align="center"></table>        
+        </div>
+    </section>
+    
+    <section>
+        
+    </section>
+
+    
+</div>
+
+<script>
+    
+    function AllcarDetails() {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:2531/myApi/Student", //URI  need to change as your desire.
+
+            dataType: "json",
+            success: function (data) {
+                var dataValue = data;
+                contentType: "application/json";
+                
+                $("#listTable").text("");
+                $("#listTable").append('<tr><td width="50px">ID</td><td width="50px">Name</td><td width="50px">Address<td></tr>');
+
+                $.each(dataValue, function (i, eachStudent) {
+                    
+                    $("#listTable").append('<tr><td width="50px">' + eachStudent.ID +
+                     '</td><td width="50px">' + eachStudent.Name +
+                    '</td><td width="50px">' + eachStudent.Address +'<td></tr>');
+
+                });
+            },
+            error: function (xhr) {
+                alert(xhr.responseText);
+            }
+        });
+    }
+</script>
